@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "598729022344",
+    "project_id": "subduko",
+    "storage_bucket": "subduko.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598729022344:android:f5f4b6e37622c0d38d383d",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCt2Rxy56TS4npXVC_yKOGeRh2O-IvZy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
