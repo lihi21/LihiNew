@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ocean"
     tools:context=".GameActivity">
 
     <LinearLayout
@@ -15,10 +16,10 @@
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"></LinearLayout>
+        app:layout_constraintVertical_bias="0.158"></LinearLayout>
 
     <Button
         android:id="@+id/button2"
@@ -28,6 +29,7 @@
         android:layout_marginBottom="16dp"
         android:onClick="chooseSubSize"
         android:text="2"
+        android:backgroundTint="#1C6FB1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -38,7 +40,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="16dp"
         android:onClick="chooseSubSize"
-
+        android:backgroundTint="#1C6FB1"
         android:text="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button5"
@@ -53,7 +55,7 @@
         android:layout_marginBottom="14dp"
         android:onClick="chooseSubSize"
         android:text="5"
-
+        android:backgroundTint="#1C6FB1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -64,6 +66,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="16dp"
         android:onClick="chooseSubSize"
+        android:backgroundTint="#1C6FB1"
         android:text="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2" />
@@ -96,46 +99,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="1.0" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="418dp" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="-0.91240877" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="-36dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="526dp" />
 
     <Button
         android:id="@+id/button6"
@@ -143,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
         android:layout_marginBottom="48dp"
+        android:backgroundTint="#1C6FB1"
         android:onClick="moveToOnline"
         android:text="Next"
         app:layout_constraintBottom_toTopOf="@+id/button4"

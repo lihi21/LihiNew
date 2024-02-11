@@ -17,6 +17,7 @@ GameLogic logic;
     private Paint misgeret;
 
 
+
     Square[][] squars = new Square[ROW][COL];
 
 
@@ -64,6 +65,11 @@ GameLogic logic;
     //    mSquare.draw(canvas);
     }
 
+    public void setLoigicalBoard(int[][] arr)
+    {
+        this.logic.setArry(arr);
+    }
+
 
     public void logicalToVisual(int[][] arr)
     {
@@ -100,14 +106,29 @@ GameLogic logic;
                 for (int j = 0; j < squars.length; j++) {
                     if (squars[i][j].didXAndYInSquare(x, y)) {
 
-                        boolean result = logic.place(i,j);
-                        Log.d("BOARDGAME", "onTouchEvent: " + i + j);
+                        // guessing the upper board
+                        if(logic.getPlayer() == 1)
+                        {
+                            // check if there is a SUBMARINE
+                            // if so - set ocuupied
+                            // else - set GREY
+                            if(logic.isThereSub((int) x,(int) y))
+                                squars[i][j].setOccupied(true);
+                            //else
 
 
-                        // if updated logically - draw on the BOARD UI
-                        if(result) {
-                            squars[i][j].setOccupied(true);
-                            invalidate();
+                        }
+                        // this means we are placing a SUBmarine
+                        else {
+                            boolean result = logic.place(i, j);
+                            Log.d("BOARDGAME", "onTouchEvent: " + i + j);
+
+
+                            // if updated logically - draw on the BOARD UI
+                            if (result) {
+                                squars[i][j].setOccupied(true);
+                                invalidate();
+                            }
                         }
                     }
                 }

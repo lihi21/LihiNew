@@ -7,7 +7,26 @@ public class GameLogic {
     int privX = 0;
     int privY = 0;
     int counter =0;
-    int side = 0;     // 1 culom, 2 row, 0 first click
+    int side = 0; // 1 culom, 2 row, 0 first click
+
+    int player;
+
+    public GameLogic()
+    {
+        this.player = 0; // this means this players board
+    }
+
+    public void setOtherPlayer()
+    {
+        this.player = 1; // this means other player's board logic!
+    }
+
+    public int getPlayer()
+    {
+        return  this.player;
+    }
+
+
 
 
     public int[][] getArry()
@@ -20,6 +39,19 @@ public class GameLogic {
                 arry[i][j] = 0;
             }
         }
+    }
+
+    public void setArry(int[][] arr)
+    {
+        this.arry = arr;
+
+    }
+
+    public boolean isThereSub(int x,int y)
+    {
+        if(arry[x][y] != 0)
+            return true;
+        return false;
     }
 
     // x,y

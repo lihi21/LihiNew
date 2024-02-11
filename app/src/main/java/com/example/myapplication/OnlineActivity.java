@@ -25,19 +25,30 @@ public class OnlineActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        arrGame =(int[][]) getIntent().getSerializableExtra("arr");
+        Log.d("log", "onCreate: " + arrGame[0][0]);
 
         // create 2 board games
         glMe = new GameLogic();
         myBoard = new BoardGame(this,glMe);
+        myBoard.setLoigicalBoard(arrGame);
 
 
 
+        // other player =- upper board
         glOther = new GameLogic();
         otherBoard = new BoardGame(this,glOther);
+        glOther.setOtherPlayer();
+
+        // for testing only - we copy our board
+        int[][] oppBoard = arrGame.clone();
+
+        otherBoard.setLoigicalBoard(oppBoard);
+
+        // for the other player we need to get his Opponent board (behind only)
+        // not displaying this board
         setContentView(R.layout.activity_online);
 
-        arrGame =(int[][]) getIntent().getSerializableExtra("arr");
-        Log.d("log", "onCreate: " + arrGame[0][0]);
 
 
 
