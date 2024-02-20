@@ -17,7 +17,6 @@ GameLogic logic;
     private Paint misgeret;
 
 
-
     Square[][] squars = new Square[ROW][COL];
 
 
@@ -112,18 +111,17 @@ GameLogic logic;
                             // check if there is a SUBMARINE
                             // if so - set ocuupied
                             // else - set GREY
-                            if(logic.isThereSub((int) x,(int) y))
+                            if(logic.isThereSub(i,j))
                                 squars[i][j].setOccupied(true);
-                            //else
-
+                            else
+                                squars[i][j].setWrongClicked();
+                            invalidate();
 
                         }
                         // this means we are placing a SUBmarine
                         else {
                             boolean result = logic.place(i, j);
                             Log.d("BOARDGAME", "onTouchEvent: " + i + j);
-
-
                             // if updated logically - draw on the BOARD UI
                             if (result) {
                                 squars[i][j].setOccupied(true);
@@ -132,12 +130,9 @@ GameLogic logic;
                         }
                     }
                 }
-
-
             }
         }
         return true;
-
     }
 }
 

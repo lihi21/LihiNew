@@ -45,4 +45,5 @@ public class GameActivity extends AppCompatActivity {
         i.putExtra("arr",gl.getArry());
         startActivity(i);
     }
+
 }

@@ -9,6 +9,8 @@ public class Square {
     float x,y,w,h;
 
     boolean isOcuppied;
+
+    boolean isWrongClicked=false;
     int color;
     Paint p;
     public  Square(BoardGame bordgame,float x,float y,float w,float h,Paint p){
@@ -33,6 +35,13 @@ public class Square {
             canvas.drawRect(x,y,x+w,y+h,p);
 
         }
+        if(isWrongClicked)
+        {
+            Paint p= new Paint();
+            p.setColor(Color.GRAY);
+            canvas.drawRect(x,y,x+w,y+h,p);
+
+        }
     }
     public boolean didXAndYInSquare(float xo,float yo)
     {
@@ -41,6 +50,11 @@ public class Square {
         return  false;
     }
 
+
+    public void setWrongClicked()
+    {
+        isWrongClicked = true;
+    }
 
     public void setOccupied(boolean state) {
         isOcuppied = state;

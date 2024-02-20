@@ -1,12 +1,13 @@
 package com.example.myapplication;
 
 public class GameLogic {
+    int counter = 0;
     private final static int ROW=6;
     private final static int COL=6;
     int[][] arry = new int[ROW][COL];
     int privX = 0;
     int privY = 0;
-    int counter =0;
+    int count =0;
     int side = 0; // 1 culom, 2 row, 0 first click
 
     int player;
@@ -116,5 +117,11 @@ public class GameLogic {
         return false;
     }
 
+    public boolean checkWin()
+    {
+        if(counter == GameConst.win)
+            return  true;
+        return false;
+    }//לשאול איפה לשים את את הפעולה שתחזיר ניצחון אטו לא ולעבור למסך מנצח או מפסיד אחר כך לבדוק את הרום הזה
 
 }
