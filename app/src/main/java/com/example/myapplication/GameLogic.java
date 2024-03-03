@@ -7,7 +7,8 @@ public class GameLogic {
     int[][] arry = new int[ROW][COL];
     int privX = 0;
     int privY = 0;
-    int count =0;
+    int countWin =0;
+    int countLose =0;
     int side = 0; // 1 culom, 2 row, 0 first click
 
     int player;
@@ -59,7 +60,7 @@ public class GameLogic {
     // privX, privY
     // counter
     // GameActicvity.subSize
-    public boolean check(int x, int y, int sub){
+    public boolean check(int x, int y, int sub){  //בנייה של הלוחות בודק אם אפשר להניח שם צוללת
         if(counter == 0)
         {
             privX = x;
@@ -119,9 +120,15 @@ public class GameLogic {
 
     public boolean checkWin()
     {
-        if(counter == GameConst.win)
+        if(countWin == GameConst.win)
             return  true;
         return false;
     }//לשאול איפה לשים את את הפעולה שתחזיר ניצחון אטו לא ולעבור למסך מנצח או מפסיד אחר כך לבדוק את הרום הזה
+
+    public void addToWinCounter() {
+
+        countWin++;
+    }
+
 
 }

@@ -10,29 +10,30 @@
 
     <LinearLayout
         android:id="@+id/otherBoard"
-        android:layout_width="409dp"
-        android:layout_height="359dp"
+        android:layout_width="359dp"
+        android:layout_height="322dp"
         android:layout_marginBottom="13dp"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
 
         android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@+id/myBoard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.092"></LinearLayout>
+        app:layout_constraintVertical_bias="0.551"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/myBoard"
-        android:layout_width="409dp"
-        android:layout_height="359dp"
-        android:layout_marginTop="372dp"
+        android:layout_width="357dp"
+        android:layout_height="328dp"
+        android:layout_marginTop="364dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.703"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 

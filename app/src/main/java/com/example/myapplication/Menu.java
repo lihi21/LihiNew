@@ -30,7 +30,8 @@ public class Menu extends AppCompatActivity {
 
     private String gameid;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
     }
@@ -87,7 +88,13 @@ public class Menu extends AppCompatActivity {
         startActivity((i));
     }
 
-   // public void joimClicked()
+    public void joinClicked(View view)
+    {
+        TextView enterCode = findViewById(R.id.editSend);
+        Button clickJoin = findViewById(R.id.button7);
+        enterCode.setVisibility((View.VISIBLE));
+        clickJoin.setVisibility((View.VISIBLE));
+    }
 
 
 }

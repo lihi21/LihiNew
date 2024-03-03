@@ -2,6 +2,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,9 @@ GameLogic logic;
 
     public BoardGame(Context context,GameLogic g) {
         super(context);
+
+        this.context=context;
+
 
         logic= g;
 
@@ -111,12 +115,25 @@ GameLogic logic;
                             // check if there is a SUBMARINE
                             // if so - set ocuupied
                             // else - set GREY
-                            if(logic.isThereSub(i,j))
+                            if(logic.isThereSub(i,j)) {
+
                                 squars[i][j].setOccupied(true);
+                                logic.addToWinCounter();
+
+                                if(logic.checkWin())
+                                {
+
+                                    ( (OnlineActivity)context).gameWon();
+
+                                }
+                                else
+                                {
+                                    ( (OnlineActivity)context).gameLose();
+                                }
+                            }
                             else
                                 squars[i][j].setWrongClicked();
                             invalidate();
-
                         }
                         // this means we are placing a SUBmarine
                         else {
