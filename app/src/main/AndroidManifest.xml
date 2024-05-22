@@ -13,11 +13,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".losserr"
-            android:exported="false"
-            android:label="@string/title_activity_losserr"
-            android:theme="@style/Theme.MyApplication" />
-        <activity
             android:name=".Loser"
             android:exported="false" />
         <activity

@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
+
 public class GameLogic {
     int counter = 0;
     private final static int ROW=6;
@@ -31,9 +35,14 @@ public class GameLogic {
 
 
 
-    public int[][] getArry()
-    {
-        return this.arry;
+    public ArrayList<Integer> getArry() {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < arry.length; i++) {
+            for (int j = 0; j < arry.length; j++) {
+                arr.add(arry[i][j]);
+            }
+        }
+        return arr;
     }
     public void ristartArry(){
         for (int i = 0; i < arry.length; i++) {
@@ -43,10 +52,14 @@ public class GameLogic {
         }
     }
 
-    public void setArry(int[][] arr)
+    public void setArry(ArrayList<Integer> arr)
     {
-        this.arry = arr;
-
+        for (int i = 0; i < arry.length; i++) {
+            for (int j = 0; j < arry.length; j++) {
+                // single array to two dimension array
+                arry[i][j] = arr.get(i*6+j);
+            }
+        }
     }
 
     public boolean isThereSub(int x,int y)
@@ -131,4 +144,7 @@ public class GameLogic {
     }
 
 
+    public void setTwoArry(int[][] arr) {
+        this.arry = arr;
+    }
 }

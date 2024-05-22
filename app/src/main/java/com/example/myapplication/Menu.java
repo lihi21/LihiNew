@@ -24,11 +24,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 
 public class Menu extends AppCompatActivity {
 
-    private String gameid;
+    public  String gameid;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,13 +41,13 @@ public class Menu extends AppCompatActivity {
 
         FirebaseFirestore fb = FirebaseFirestore.getInstance();
         roomGame rg = new roomGame();
-        fb.collection("roomGame").add(rg).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        fb.collection("roomGame").add(rg.roomGameToMap()).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                TextView CodeTextView = findViewById(R.id.textView7);
+                TextView CodeTextView = findViewById(R.id.textViewMenuCreate);
                 ImageView shareImage = findViewById(R.id.imageView);
                 gameid = documentReference.getId();
-                CodeTextView.setText("your game code is: " + gameid + " .share it with your partner!");
+                CodeTextView.setText( gameid);
                 CodeTextView.setVisibility(View.VISIBLE);
                 shareImage.setVisibility(View.VISIBLE);
 
@@ -58,22 +59,23 @@ public class Menu extends AppCompatActivity {
                 Log.d("ONFAILER","onfailure"+ e.getMessage());
             }
         });
-
+        //Button startbutton = findViewById(R.id.startbutton);
+        //startbutton.setVisibility((View.VISIBLE));
     }
 
     public void shareWithFriends(View view){
-        Intent shareIntent = new Intent(Intent.ACTION_SENDTO);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "hello, this is the code for the game:" +gameid+ "please join");
-        startActivity(Intent.createChooser(shareIntent,"share using"));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, gameid);
+        startActivityForResult(Intent.createChooser(shareIntent,"share using"),1);
     }
 
     public void  ClickToNext(View view)
     {
-        TextView eCode = findViewById(R.id.editSend);
+        TextView eCode = findViewById(R.id.eTextPasswordcode);
         String gameCode = eCode.getText().toString();
         Intent i = new Intent(this, GameActivity.class);
-        i.putExtra("gameId",gameCode);
+        i.putExtra("gameId",gameid);
         i.putExtra("player", Other);
         i.putExtra(game_confing, two_phone);
         startActivity(i);
@@ -83,18 +85,32 @@ public class Menu extends AppCompatActivity {
     {
         super.onActivityResult(reqCode,resCode,data);
         Intent i = new Intent(this, GameActivity.class);
-        i.putExtra("game id", gameid);
+        i.putExtra("gameId", gameid);
         i.putExtra("player", Host);
         startActivity((i));
     }
 
     public void joinClicked(View view)
     {
-        TextView enterCode = findViewById(R.id.editSend);
+        EditText enterCode = findViewById(R.id.eTextPasswordcode);
         Button clickJoin = findViewById(R.id.button7);
+        Button startbutton = findViewById(R.id.startbutton);
         enterCode.setVisibility((View.VISIBLE));
         clickJoin.setVisibility((View.VISIBLE));
+        startbutton.setVisibility((View.VISIBLE));
     }
+    public  void moveToNextActivity(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        EditText enterCode = findViewById(R.id.eTextPasswordcode);
+        gameid = enterCode.getText().toString();
+
+        intent.putExtra("gameId", gameid);
+        intent.putExtra("player", Other);
+
+        startActivity(intent);
+
+    }}
 
 
-}
+
+

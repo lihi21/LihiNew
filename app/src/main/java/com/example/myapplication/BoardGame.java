@@ -70,7 +70,7 @@ GameLogic logic;
 
     public void setLoigicalBoard(int[][] arr)
     {
-        this.logic.setArry(arr);
+        this.logic.setTwoArry(arr);
     }
 
 
