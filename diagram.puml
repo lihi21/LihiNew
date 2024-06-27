@@ -1,0 +1,187 @@
+@startuml
+class com.example.myapplication.Menu {
++ String gameid
+~ ActivityResultLauncher<Intent> mActivityResultLauncher
+# void onCreate(Bundle)
++ void shareClick(View)
++ void shareWithFriends(View)
++ void ClickToNext(View)
+# void onActivityResult(int,int,Intent)
++ void joinClicked(View)
++ void moveToNextActivity(View)
+}
+
+
+class com.example.myapplication.FirstFragment {
+- FragmentFirstBinding binding
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+}
+
+
+class com.example.myapplication.winner {
+# void onCreate(Bundle)
+}
+
+class com.example.myapplication.OnlineActivity {
+- int[][] arrGame
+- int[][] oppBoard
+- FirebaseFirestore fb
+- GameLogic glMe
+- GameLogic glOther
+- BoardGame myBoard
+- BoardGame otherBoard
+- String gameId
+- roomGame game
+- int player
+# void onCreate(Bundle)
+- void getRoomDataFromFirebase()
+- void startTimer()
++ void gameWon()
++ void gameLose()
+}
+
+
+class com.example.myapplication.SecondFragment {
+- FragmentSecondBinding binding
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+}
+
+
+class com.example.myapplication.Square {
+~ BoardGame bordgame
+~ float x
+~ boolean isOcuppied
+~ boolean isWrongClicked
+~ int color
+~ Paint p
++ void draw(Canvas)
++ boolean didXAndYInSquare(float,float)
++ void setWrongClicked()
++ void setOccupied(boolean)
+}
+
+
+class com.example.myapplication.GameDecision {
+# void onCreate(Bundle)
+- void moveToWinner()
+- void moveToLoser()
+}
+
+class com.example.myapplication.roomGame {
+- String status
+- String statusOther
+- int gameOwner
+- int[][] myboard
+- int currX
+- ArrayList<Long> arrClick
+- int moves
+- int movesother
++ int getMoves()
++ int getMovesother()
++ String getStatusOther()
++ String getStatus()
++ void setStatus(String)
++ ArrayList<Integer> getMyboard()
++ int[][] getMyOriginalArray()
++ int[][] getotherArray()
++ void setMyboard(ArrayList<Long>)
++ ArrayList<Integer> getOther()
++ void setOther(ArrayList<Long>)
++ Map<String,Object> roomGameToMap()
++ void back(int,int)
+}
+
+
+class com.example.myapplication.GameActivity {
+~ BoardGame bordGame
++ {static} int subSize
+~ GameLogic gl
+# void onCreate(Bundle)
++ void chooseSubSize(View)
++ void moveToOnline(View)
+- void waitForPlayersToJoin(DocumentReference,String,int)
+}
+
+
+class com.example.myapplication.MainActivity {
+- FirebaseAuth mAuth
+# void onCreate(Bundle)
+- void moveToNextActivity()
++ void SignUp(View)
+}
+
+
+class com.example.myapplication.GameConst {
++ {static} int win
++ {static} int Host
++ {static} int Other
++ {static} int one_phone
++ {static} int two_phone
++ {static} String game_confing
+}
+
+class com.example.myapplication.BoardGame {
+~ boolean setCoin
+~ GameLogic logic
+- {static} int ROW
+- {static} int COL
+- Paint misgeret
++ {static} ArrayList<Long> click
++ int numOfCLicks
+~ Square[][] squars
+~ Square mSquare
+~ Context context
+# void onDraw(Canvas)
++ void drawBoard(Canvas)
++ void setLoigicalBoard(int[][])
++ void logicalToVisual(int[][])
++ boolean onTouchEvent(MotionEvent)
+}
+
+
+class com.example.myapplication.GameLogic {
+~ int counter
+- {static} int ROW
+- {static} int COL
+~ int[][] arry
+~ int privX
+~ int privY
+~ int countWin
+~ int countLose
+~ int side
+~ int player
++ void setOtherPlayer()
++ int getPlayer()
++ ArrayList<Integer> getArry()
++ void ristartArry()
++ void setArry(ArrayList<Integer>)
++ boolean isThereSub(int,int)
++ boolean check(int,int,int)
++ boolean place(int,int)
++ boolean checkWin()
++ void addToWinCounter()
++ void setTwoArry(int[][])
+}
+
+
+class com.example.myapplication.Loser {
+# void onCreate(Bundle)
+}
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.Menu
+androidx.fragment.app.Fragment <|-- com.example.myapplication.FirstFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.winner
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.OnlineActivity
+androidx.fragment.app.Fragment <|-- com.example.myapplication.SecondFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.GameDecision
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.GameActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.MainActivity
+android.view.View <|-- com.example.myapplication.BoardGame
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.Loser
+@enduml

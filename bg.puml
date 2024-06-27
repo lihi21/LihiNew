@@ -1,0 +1,25 @@
+@startuml
+class com.example.myapplication.BoardGame {
+~ boolean setCoin
+~ GameLogic logic
+- {static} int ROW
+- {static} int COL
+- Paint misgeret
++ {static} ArrayList<Long> click
++ int numOfCLicks
+~ Square[][] squars
+~ Square mSquare
+~ Context context
++ int getNumOfCLicks()
+# void onDraw(Canvas)
++ void drawBoard(Canvas)
++ void setLoigicalBoard(int[][])
++ void logicalToVisual(int[][])
++ boolean onTouchEvent(MotionEvent)
+}
+
+
+
+
+android.view.View <|-- com.example.myapplication.BoardGame
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+class com.example.myapplication.roomGame {
+- String status
+- String statusOther
+- int gameOwner
+- int[][] myboard
+- int currX
+- ArrayList<Long> arrClick
+- int moves
+- int movesother
++ int getMoves()
++ int getMovesother()
++ String getStatusOther()
++ String getStatus()
++ void setStatus(String)
++ ArrayList<Integer> getMyboard()
++ int[][] getMyOriginalArray()
++ int[][] getotherArray()
++ void setMyboard(ArrayList<Long>)
++ ArrayList<Integer> getOther()
++ void setOther(ArrayList<Long>)
++ Map<String,Object> roomGameToMap()
++ void back(int,int)
+}
+
+
+@enduml
