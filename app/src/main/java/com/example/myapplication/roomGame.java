@@ -20,38 +20,29 @@ public class roomGame
     private String status;
 
 
-    public void setStatusOther(String statusOther) {
-        this.statusOther = statusOther;
-    }
-
     private  String statusOther;
 
-    public int getGameOwner() {
-        return gameOwner;
-    }
-
-    public void setGameOwner(int gameOwner) {
-        this.gameOwner = gameOwner;
-    }
 
     private int gameOwner;
 
     private int[][]   myboard, other;
 
-    private int currentPlayer;
+ //   private int currentPlayer;
     private int currX, currY;
 
-/*
-    public int getCurrentPlayer() {
-        return currentPlayer;
+    private  ArrayList<Long> arrClick = new ArrayList<>();
+    private int moves = 0;
+
+    public int getMoves() {
+        return moves;
     }
 
-    public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public int getMovesother() {
+        return movesother;
     }
 
+    private int movesother = 0;
 
- */
 
     //  GameLogic gameLogic;
 /*
@@ -59,27 +50,26 @@ public class roomGame
         this.myboard = myboard;
     }
 
-    public void setOther(BoardGame other) {
-        this.other = other;
-    }
-
  */
   public String getStatusOther() {
       return statusOther;
   }
 
+/*
+    public void addmove(int index)
+    {
 
+      arrClick.add((long)index);
+    }
+    */
+
+
+    /*
     public void setcurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
-    public void setCurrX(int currX) {
-        this.currX = currX;
-    }
-
-    public void setCurrY(int currY) {
-        this.currY = currY;
-    }
+     */
 
 
     public String getStatus() {
@@ -153,19 +143,6 @@ public class roomGame
         }
 
     }
-
-
-    public int getcurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public int getCurrX() {
-        return currX;
-    }
-
-    public int getCurrY() {
-        return currY;
-    }
 /*
     public GameLogic getGameLogic() {
         return gameLogic;
@@ -177,14 +154,18 @@ public class roomGame
     // this
 
     public Map<String,Object> roomGameToMap() {
+
+   //     this.arrClick = BoardGame.click;
         // dictionary
         Map<String, Object> map = new HashMap<>();
         map.put("currX", this.currX);
         map.put("currY", this.currY);
-        map.put("currentplyer", this.currentPlayer);
+    //    map.put("currentplayer", this.currentPlayer);
         map.put("gameOwner", this.gameOwner);
         map.put("status", this.status);
         map.put("statusOther", this.statusOther);
+
+     //   map.put("arrClick",arrClick);
 
         map.put("myboard", getMyboard());
         map.put("other", getOther());
@@ -193,7 +174,7 @@ public class roomGame
     public roomGame(Map<String, Object> map) {
         this.currX = Integer.parseInt(map.get("currX").toString());
         this.currY = Integer.parseInt(map.get("currY").toString());
-        this.currentPlayer = Integer.parseInt(map.get("currentplyer").toString());
+     //   this.currentPlayer = Integer.parseInt(map.get("currentplayer").toString());
         this.gameOwner = Integer.parseInt(map.get("gameOwner").toString());
         this.status = map.get("status").toString();
         this.statusOther = map.get("statusOther").toString();
@@ -203,6 +184,7 @@ public class roomGame
         ArrayList<Long> arrBoard = null;
         ArrayList<Long> arrOther = null;
         try {
+
 
             arrBoard =   (ArrayList<Long>)map.get("myboard");
 
@@ -217,19 +199,21 @@ public class roomGame
 
 
     }
-
+/*
     public roomGame(int currentplayer, int x, int y)
     {
         myboard = new int[6][6];
         other = new int[6][6];
-        currentPlayer = currentPlayer;
+      //  currentPlayer = currentPlayer;
         currX = x;
         currY = y;
     }
+    */
+
     public roomGame() {
         myboard = new int[6][6];
         other = new int[6][6];
-        currentPlayer = GameConst.Host;
+      //  currentPlayer = GameConst.Host;
         currX = -1;
         currY = -1;
         status = "BUILD";

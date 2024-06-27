@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 public class BoardGame extends View {
     boolean setCoin = false;
 GameLogic logic;
@@ -18,6 +20,14 @@ GameLogic logic;
     private Paint misgeret;
 
 
+    public static ArrayList<Long> click = new ArrayList<>();
+
+    public int getNumOfCLicks() {
+        return numOfCLicks;
+    }
+
+     public int numOfCLicks = 0;
+    //public static  int totalmove= 2+3+4+5;
     Square[][] squars = new Square[ROW][COL];
 
 
@@ -102,6 +112,7 @@ GameLogic logic;
             invalidate();
         }
 */
+        //int arr[]
         if (event.getAction() == MotionEvent.ACTION_UP) {
             x = event.getX();
             y = event.getY();
@@ -115,24 +126,32 @@ GameLogic logic;
                             // check if there is a SUBMARINE
                             // if so - set ocuupied
                             // else - set GREY
+                           // roomGame.addmove(6*x+y);
+                            click.add((long)(6*x+y));
+
                             if(logic.isThereSub(i,j)) {
 
                                 squars[i][j].setOccupied(true);
                                 logic.addToWinCounter();
-
-                                if(logic.checkWin())
+                                //totalmove++;
+                         /*         if(logic.checkWin())
                                 {
 
                                     ( (OnlineActivity)context).gameWon();
 
                                 }
-                                else
+                              else
                                 {
                                     ( (OnlineActivity)context).gameLose();
                                 }
+
+                           */
                             }
-                            else
+                            else {
                                 squars[i][j].setWrongClicked();
+                           //     roomGame.setmoves();
+                                numOfCLicks++;
+                            }
                             invalidate();
                         }
                         // this means we are placing a SUBmarine
@@ -149,8 +168,10 @@ GameLogic logic;
                 }
             }
         }
-        return true;
+    return true;
     }
+
+
 }
 
 

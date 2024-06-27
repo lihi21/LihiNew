@@ -133,10 +133,10 @@ public class GameLogic {
 
     public boolean checkWin()
     {
-        if(countWin == GameConst.win)
+        if(countWin >= GameConst.win)
             return  true;
         return false;
-    }//לשאול איפה לשים את את הפעולה שתחזיר ניצחון אטו לא ולעבור למסך מנצח או מפסיד אחר כך לבדוק את הרום הזה
+    }
 
     public void addToWinCounter() {
 

@@ -66,6 +66,7 @@
         android:layout_marginBottom="28dp"
         android:background="#9E6464"
         android:backgroundTint="#1473BC"
+        android:textIsSelectable="true"
         android:text=""
         android:textSize="30sp"
         android:visibility="invisible"

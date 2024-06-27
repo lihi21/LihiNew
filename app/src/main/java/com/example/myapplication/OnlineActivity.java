@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +33,7 @@ public class OnlineActivity extends AppCompatActivity {
     private String gameId;
 
     private roomGame game;
+    private int player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class OnlineActivity extends AppCompatActivity {
 
         // get the room from firebase!!
         gameId= getIntent().getStringExtra("gameid");
+
+        player = getIntent().getIntExtra("player",0);
+
         getRoomDataFromFirebase();
   //      arrGame = (int[][]) getIntent().getSerializableExtra("arr");
     //    Log.d("log", "onCreate: " + arrGame[0][0]);
@@ -104,11 +110,21 @@ public class OnlineActivity extends AppCompatActivity {
                 glMe = new GameLogic();
 
                 myBoard = new BoardGame(OnlineActivity.this , glMe);
-                myBoard.setLoigicalBoard(arrGame);
+
 
                 // other player = upper board
                 glOther = new GameLogic();
                 otherBoard = new BoardGame(OnlineActivity.this, glOther);
+
+                if(player==GameConst.Host) {
+                    myBoard.setLoigicalBoard(arrGame);
+                    otherBoard.setLoigicalBoard(oppBoard);
+                }
+                else
+                {
+                    myBoard.setLoigicalBoard(oppBoard);
+                    otherBoard.setLoigicalBoard(arrGame);
+                }
                 glOther.setOtherPlayer();
                 setContentView(R.layout.activity_online);
 
@@ -118,7 +134,28 @@ public class OnlineActivity extends AppCompatActivity {
                 llMe.addView(myBoard);
 
 
-                myBoard.logicalToVisual(arrGame);
+                //  myBoard.logicalToVisual(arrGame);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(10000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(player==GameConst.Host)
+                                    myBoard.logicalToVisual(arrGame);
+                                else
+
+                                    myBoard.logicalToVisual(oppBoard);
+
+
+                            }
+                        });
+                    }
+                }).start();
+
+                startTimer();
 
 
 
@@ -127,6 +164,62 @@ public class OnlineActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void startTimer() {
+
+        TextView timer = findViewById(R.id.textViewTimer);
+
+
+
+        CountDownTimer countDownTimer = new CountDownTimer(70000,1000) {
+            @Override
+            public void onTick(long l) {
+
+                int value = Integer.valueOf(timer.getText().toString());
+                if(value>0)
+                 timer.setText(""+(value-1));
+
+
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                // after finished
+                // move to last Acitivty
+                // get num of clicks
+
+
+                boolean win = glOther.checkWin();
+
+                int numOfClicks = otherBoard.getNumOfCLicks();
+                if(!win)
+                    numOfClicks = 1000;
+
+                String fieldToUpdate = "moves";
+                if(player!=GameConst.Host)
+                    fieldToUpdate = "movesother";
+
+                // update in firebase numberofClicks
+                   fb.collection("roomGame").document(gameId).update(fieldToUpdate,numOfClicks).addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void unused) {
+                           Intent i = new Intent(OnlineActivity.this,GameDecision.class);
+                           i.putExtra("player",player);
+                           i.putExtra("gameid",gameId);
+                           i.putExtra("win",win);
+                           startActivity(i);
+                       }
+                   });
+
+
+            }
+        };
+
+
+        countDownTimer.start();
     }
 
     public void gameWon() {

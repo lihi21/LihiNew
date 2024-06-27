@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,6 +26,8 @@ public class GameActivity extends AppCompatActivity {
     public static int subSize = 0;
 
     GameLogic gl;
+
+    private int counterClicks = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +47,20 @@ public class GameActivity extends AppCompatActivity {
         int num = Integer.valueOf(b.getText().toString());
         subSize = num;
 
+        b.setClickable(false);
+
+        counterClicks++;
+
 
     }
 
     public void moveToOnline(View view) {
+
+        if(counterClicks<4)
+        {
+            Toast.makeText(this,"please assign all subs",Toast.LENGTH_LONG).show();
+            return;
+        }
 
         String gameId = getIntent().getStringExtra("gameId");
         int player = getIntent().getIntExtra("player", 0);

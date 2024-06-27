@@ -27,7 +27,6 @@ public class Square {
     {
         canvas.drawRect(x,y,  x+w, y+h,p);
 
-        //
         if(isOcuppied)
         {
             Paint p= new Paint();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -37,25 +38,36 @@ public class MainActivity extends AppCompatActivity {
     public void SignUp(View view){
         EditText etMail = findViewById(R.id.editTextTextEmailAddress2);
         EditText etPassword = findViewById(R.id.editTextTextPassword2);
+
+        if(TextUtils.isEmpty(etMail.getText()) ||TextUtils.isEmpty(etPassword.getText()))
+        {
+            Toast.makeText(this,"please assign again",Toast.LENGTH_LONG).show();
+
+            return;
+        }
         String emil = etMail.getText().toString();
         String password = etPassword.getText().toString();
-        mAuth.createUserWithEmailAndPassword(emil,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) // register success
-                {
-                    Toast.makeText(MainActivity.this, "register success", Toast.LENGTH_SHORT).show();
-                    // can be done only register SUCCESS!!!
-                    moveToNextActivity();
 
-                } else // register fail
-                {
-                    String failureReason = task.getException().toString();
-                    Log.d("REGISTER FB", "onComplete: " + failureReason);
-                    Toast.makeText(MainActivity.this, "register failed " + failureReason, Toast.LENGTH_SHORT).show();
 
+            mAuth.createUserWithEmailAndPassword(emil,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) // register success
+                    {
+                        Toast.makeText(MainActivity.this, "register success", Toast.LENGTH_SHORT).show();
+                        // can be done only register SUCCESS!!!
+                        moveToNextActivity();
+
+                    } else // register fail
+                    {
+                        String failureReason = task.getException().toString();
+                        Log.d("REGISTER FB", "onComplete: " + failureReason);
+                        Toast.makeText(MainActivity.this, "register failed " + failureReason, Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-            }
-        });
+            });
+
+
     }
 }

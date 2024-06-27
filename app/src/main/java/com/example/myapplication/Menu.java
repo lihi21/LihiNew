@@ -3,10 +3,14 @@ package com.example.myapplication;
 import static com.example.myapplication.GameConst.Other;
 import static com.example.myapplication.GameConst.two_phone;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +41,17 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
+
+    ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),result->
+    {
+    //    if(result.getResultCode()== Activity.RESULT_OK)
+    //    {
+            Intent i = new Intent(this, GameActivity.class);
+            i.putExtra("gameId", gameid);
+            i.putExtra("player", Host);
+            startActivity((i));
+   //     }
+    });
     public void shareClick(View view) {
 
         FirebaseFirestore fb = FirebaseFirestore.getInstance();
@@ -67,7 +82,8 @@ public class Menu extends AppCompatActivity {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, gameid);
-        startActivityForResult(Intent.createChooser(shareIntent,"share using"),1);
+        mActivityResultLauncher.launch(shareIntent);
+       // startActivityForResult(Intent.createChooser(shareIntent,"share using"),1);
     }
 
     public void  ClickToNext(View view)
